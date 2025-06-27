@@ -12,14 +12,15 @@ class CharacterController extends Controller
     public function add_character(CharacterRequest $request): CharacterResource {
         $data = $request->validated();
         $character = Character::create([
-    'MODEL' => $request->input('model'),
-    'DESCRIPTION' => $request->input('description'),
-    'UNIT' => $request->input('unit'),
-    'PURPOSE' => $request->input('purpose'),
-    'PRODUCTION' => $request->input('production'),
-]);
+        'id' => $request->input('id'),
+        'MODEL' => $request->input('model'),
+        'DESCRIPTION' => $request->input('description'),
+        'UNIT' => $request->input('unit'),
+        'PURPOSE' => $request->input('purpose'),
+        'PRODUCTION' => $request->input('production'),
+        ]);
 
 
-        return Character::all()->toResource();
+        return Character::findOrFail($character->id)->toResource();
     }
 }
